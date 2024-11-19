@@ -1,0 +1,66 @@
+syntax = "proto3";
+
+option go_package ="github.com/ashm8206/common/api";
+
+package api;
+
+
+message Order {
+    string ID = 1;
+    string CustomerID = 2;
+    string Status = 3;
+    repeated Item Items = 4;
+    string PaymentLink  = 5;
+
+}
+
+message Item {
+    string ID = 1;
+    string Name = 2;
+    int64 Quantity = 3;
+    string PriceID = 4;
+
+
+}
+message ItemsWithQuantity {
+    string ID = 1;
+    int64 Quantity = 2;
+
+}
+service OrderService {
+    rpc CreateOrder(CreateOrderRequest) returns (Order);
+    rpc GetOrder(GetOrderRequest) returns (Order);
+    rpc UpdateOrder(Order) returns (Order);
+}
+
+message GetOrderRequest {
+  string OrderID = 1;
+  string CustomerID = 2;
+}
+
+message CreateOrderRequest {
+    string CustomerID =1;
+    repeated ItemsWithQuantity Items = 2;
+}
+
+service StockService {
+  rpc CheckIfItemIsInStock(CheckIfItemIsInStockRequest) returns (CheckIfItemIsInStockResponse);
+  rpc GetItems(GetItemsRequest) returns (GetItemsResponse);
+}
+
+message CheckIfItemIsInStockRequest {
+  repeated ItemsWithQuantity Items = 1;
+}
+
+message CheckIfItemIsInStockResponse {
+  bool InStock = 1;
+  repeated Item Items = 2;
+}
+
+message GetItemsRequest {
+  repeated string ItemIDs = 1;
+}
+
+message GetItemsResponse {
+  repeated Item Items = 1;
+}
