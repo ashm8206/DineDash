@@ -9,7 +9,7 @@ Date:   09/16/24
 
 A Microservice-Based POS System for Neighborhood Diners!
 
-[]()
+![Architecture](https://github.com/ashm8206/DineDash/blob/main/ui/github-assets/DineDash.png)
 
 **Clean Layered Architecture**: The system is built with a modular, layered architecture where multiple microservices communicate via gRPC and asynchronously with RabbitMQ. Each service is separated into distinct Transport, Service, and Storage layers to ensure scalability and maintainability.
 
